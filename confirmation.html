@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تأكيد الحجز</title>
+<link rel="stylesheet" href="css/confirmation.css">
+</head>
+<body>
+<div class="confirmation-page">
+    <div class="confirmation-card">
+        <div class="success-icon">✓</div>
+        <h1>تم تأكيد الحجز بنجاح</h1>
+        <p class="success-text">شكرًا لك، تم تسجيل حجزك بنجاح.</p>
+
+        <div class="booking-details">
+            <div class="detail-row"><span>الحفلة</span><strong id="bookingEvent">-</strong></div>
+            <div class="detail-row"><span>التاريخ</span><strong id="bookingDate">-</strong></div>
+            <div class="detail-row"><span>الوقت</span><strong id="bookingTime">-</strong></div>
+            <div class="detail-row"><span>الاسم</span><strong id="bookingName">-</strong></div>
+            <div class="detail-row"><span>رقم الموبايل</span><strong id="bookingPhone">-</strong></div>
+            <div class="detail-row seats-row"><span>المقاعد</span><strong id="bookingSeats">-</strong></div>
+            <div class="detail-row"><span>مسؤول الحجز</span><strong id="bookingManager">-</strong></div>
+            <div class="detail-row"><span>عدد التذاكر</span><strong id="bookingCount">-</strong></div>
+            <div class="detail-row total-row"><span>إجمالي الحجز</span><strong id="bookingTotal">-</strong></div>
+        </div>
+
+        <div class="booking-number-box">
+            <span>رقم الحجز</span>
+            <strong id="bookingNumber">-</strong>
+        </div>
+
+        <div class="notice">يرجى الاحتفاظ ببيانات الحجز وإظهارها عند الدخول.</div>
+
+        <div class="actions">
+            <button id="whatsappBtn" class="whatsapp-btn">📱 إرسال الحجز إلى مسؤول الحجز</button>
+            <button id="backBtn" class="back-btn">العودة إلى الحفلات</button>
+        </div>
+    </div>
+</div>
+<script type="module" src="js/confirmation.js"></script>
+</body>
+</html>

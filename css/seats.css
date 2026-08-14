@@ -1,0 +1,379 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    background: #111827;
+    color: #fff;
+}
+
+.page {
+    width: 96%;
+    max-width: 1450px;
+    margin: auto;
+    padding: 20px 0 60px;
+}
+
+.back-link {
+    color: #fff;
+    text-decoration: none;
+    background: #374151;
+    padding: 10px 15px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.page h1 {
+    text-align: center;
+    margin: 20px 0 10px;
+}
+
+.event-info {
+    text-align: center;
+    color: #d1d5db;
+    font-size: 18px;
+}
+
+/* =========================================
+   LEGEND
+========================================= */
+
+.legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 25px auto;
+    flex-wrap: wrap;
+}
+
+.legend div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.legend-seat {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    border-radius: 7px;
+    box-shadow: inset 0 -3px 0 #0002;
+}
+
+/* متاح */
+.legend-seat.available {
+    background: #d9d9d9;
+}
+
+/* مختار */
+.legend-seat.selected {
+    background: #ffd54f;
+}
+
+/* قيد الانتظار */
+.legend-seat.pending {
+    background: #f59e0b;
+}
+
+/* محجوز */
+.legend-seat.booked {
+    background: #d32f2f;
+}
+
+/* =========================================
+   STAGE
+========================================= */
+
+.stage {
+    width: min(600px, 90%);
+    margin: 20px auto 40px;
+    background: #ddd;
+    color: #111;
+    text-align: center;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* =========================================
+   LAYOUT
+========================================= */
+
+.layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+    direction: ltr;
+    overflow-x: auto;
+    padding: 10px;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.row {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 6px;
+}
+
+/* =========================================
+   SEATS
+========================================= */
+
+.seat {
+    width: 50px;
+    height: 50px;
+    background: #d9d9d9;
+    border: 0;
+    border-radius: 14px 14px 8px 8px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+    color: #333;
+    position: relative;
+    box-shadow: inset 0 -4px 0 #0002, 0 3px 8px #0005;
+    transition: 0.2s;
+}
+
+.seat::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 8px;
+    width: 34px;
+    height: 8px;
+    border-radius: 8px;
+    background: #bdbdbd;
+}
+
+.seat:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.04);
+    background: #4caf50;
+    color: #fff;
+}
+
+/* مختار */
+.seat.selected {
+    background: #ffd54f;
+    color: #111;
+}
+
+.seat.selected::before {
+    background: #fbc02d;
+}
+
+/* محجوز */
+.seat.booked {
+    background: #d32f2f;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+.seat.booked::before {
+    background: #b71c1c;
+}
+
+/* قيد الانتظار */
+.seat.pending {
+    background: #f59e0b;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+.seat.pending::before {
+    background: #d97706;
+}
+
+.empty-seat {
+    width: 50px;
+    height: 50px;
+    visibility: hidden;
+}
+
+/* =========================================
+   BALCONY
+========================================= */
+
+.balcony-title {
+    text-align: center;
+    margin: 55px 0 20px;
+    padding-top: 25px;
+    border-top: 4px dashed #6b7280;
+    color: #e5e7eb;
+}
+
+/* =========================================
+   BOOKING PANEL
+========================================= */
+
+.booking-panel {
+    margin: 30px auto;
+    max-width: 560px;
+    background: #fff;
+    color: #111827;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 10px 30px #0005;
+    text-align: center;
+}
+
+.booking-panel h2 {
+    margin-bottom: 18px;
+}
+
+.booking-panel p {
+    margin: 12px 0;
+    font-size: 18px;
+}
+
+.booking-panel button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 14px;
+    border: 0;
+    border-radius: 11px;
+    background: #1976d2;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.booking-panel button:hover {
+    background: #1258a8;
+}
+
+.booking-panel input {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    margin: 8px 0 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.booking-panel label {
+    display: block;
+    text-align: right;
+    font-weight: bold;
+}
+
+.hint {
+    color: #777;
+    font-size: 14px !important;
+}
+
+.booking-panel hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .layout {
+        justify-content: flex-start;
+        gap: 25px;
+    }
+
+    .seat,
+    .empty-seat {
+        width: 40px;
+        height: 40px;
+    }
+
+    .seat::before {
+        left: 7px;
+        width: 26px;
+    }
+
+    .row {
+        gap: 5px;
+    }
+
+    .stage {
+        margin-bottom: 25px;
+    }
+
+    .legend {
+        gap: 15px;
+    }
+
+    .legend-seat {
+        width: 24px;
+        height: 24px;
+    }
+}
+/* =========================================
+   إحصائيات المقاعد
+========================================= */
+
+.seat-stats {
+    width: min(1000px, 96%);
+    margin: 25px auto 15px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.seat-stat {
+    background: #fff;
+    color: #111827;
+    border-radius: 16px;
+    padding: 16px 12px;
+    text-align: center;
+    box-shadow: 0 8px 22px #0004;
+    border-top: 5px solid #6b7280;
+}
+
+.seat-stat strong {
+    display: block;
+    font-size: 30px;
+    line-height: 1.1;
+    margin-bottom: 7px;
+}
+
+.seat-stat span {
+    display: block;
+    font-weight: bold;
+    color: #4b5563;
+}
+
+.seat-stat.capacity {
+    border-top-color: #64748b;
+}
+
+.seat-stat.booked-stat {
+    border-top-color: #d32f2f;
+}
+
+.seat-stat.pending-stat {
+    border-top-color: #f59e0b;
+}
+
+.seat-stat.available-stat {
+    border-top-color: #16a34a;
+}
+
+@media (max-width: 700px) {
+    .seat-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

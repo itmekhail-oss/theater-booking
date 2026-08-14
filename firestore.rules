@@ -1,0 +1,159 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userDocPath(uid) {
+      return /databases/$(database)/documents/users/$(uid);
+    }
+
+    function hasUserProfile() {
+      return signedIn() && exists(userDocPath(request.auth.uid));
+    }
+
+    function isSuperAdmin() {
+      return signedIn()
+        && request.auth.token.email == "it.mekhail@gmail.com";
+    }
+
+    function isBookingAdmin() {
+      return hasUserProfile()
+        && get(userDocPath(request.auth.uid)).data.role == "bookingAdmin"
+        && get(userDocPath(request.auth.uid)).data.active == true;
+    }
+
+    function assigned(eventId) {
+      return isBookingAdmin()
+        && get(userDocPath(request.auth.uid)).data.allowedEventIds is list
+        && eventId in get(userDocPath(request.auth.uid)).data.allowedEventIds;
+    }
+
+    // =========================================
+    // ADMIN USERS
+    // =========================================
+
+    match /users/{uid} {
+      // Super admin can manage all users; a signed-in user can read only
+      // their own profile so the admin page can load its permissions.
+      allow read: if isSuperAdmin()
+        || (signedIn() && request.auth.uid == uid);
+
+      allow create, update, delete: if isSuperAdmin();
+    }
+
+    // =========================================
+    // EVENTS
+    // =========================================
+
+    match /events/{eventId} {
+      // Public event information.
+      allow read: if true;
+
+      // Only the main administrator creates/edits/deletes events.
+      allow create, update, delete: if isSuperAdmin();
+
+      // =======================================
+      // BOOKINGS
+      // =======================================
+
+      match /bookings/{bookingId} {
+        // Customer data is private.
+        // Main admin: all bookings.
+        // Booking admin: only assigned events.
+        allow read: if isSuperAdmin() || assigned(eventId);
+
+        // Public customers can create pending bookings.
+        allow create: if
+          request.resource.data.eventId == eventId
+          && request.resource.data.status == "pending"
+          && request.resource.data.name is string
+          && request.resource.data.name.size() >= 1
+          && request.resource.data.name.size() <= 120
+          && request.resource.data.phone is string
+          && request.resource.data.phone.matches('^01[0-9]{9}$')
+          && request.resource.data.seats is list
+          && request.resource.data.seats.size() >= 1
+          && request.resource.data.seats.size() <= 6
+          && request.resource.data.total is number
+          && request.resource.data.total == get(
+               /databases/$(database)/documents/events/$(eventId)
+             ).data.price * request.resource.data.seats.size()
+          && request.resource.data.bookingNumber is string
+          && request.resource.data.bookingNumber.size() >= 3;
+
+        // Only administrators can change or delete a booking.
+        allow update, delete: if isSuperAdmin() || assigned(eventId);
+      }
+
+      // =======================================
+      // PUBLIC SEAT LOCKS
+      // =======================================
+
+      match /seatLocks/{seatId} {
+        // Only seat status is exposed publicly. No customer data here.
+        allow read: if true;
+
+        // A public booking creates its booking + seat locks in one batch.
+        // getAfter() verifies that the booking created by the same batch
+        // owns this seat. No authentication is required for a public buyer.
+        allow create: if
+          // Administrators may create/repair locks for existing bookings.
+          isSuperAdmin() || assigned(eventId)
+          || (
+            request.resource.data.seatNumber == seatId
+            && request.resource.data.bookingId is string
+            && request.resource.data.bookingNumber is string
+            && request.resource.data.status == "pending"
+            && getAfter(
+                 /databases/$(database)/documents/events/$(eventId)/bookings/$(request.resource.data.bookingId)
+               ).data.eventId == eventId
+            && getAfter(
+                 /databases/$(database)/documents/events/$(eventId)/bookings/$(request.resource.data.bookingId)
+               ).data.status == "pending"
+            && getAfter(
+                 /databases/$(database)/documents/events/$(eventId)/bookings/$(request.resource.data.bookingId)
+               ).data.seats.hasAny([seatId])
+          );
+
+        // Admins can repair legacy locks, confirm them, edit them, or delete them.
+        allow update, delete: if isSuperAdmin() || assigned(eventId);
+      }
+    }
+
+    // =========================================
+    // LEGACY BOOKED SEATS
+    // =========================================
+
+    match /bookedSeats/{seatId} {
+      allow read: if true;
+
+      allow create: if
+        request.resource.data.seatNumber is string
+        && request.resource.data.customerName is string
+        && request.resource.data.customerPhone is string
+        && request.resource.data.createdAt != null;
+
+      allow update, delete: if isSuperAdmin();
+    }
+
+    // =========================================
+    // BOOKING INDEX
+    // =========================================
+
+    match /bookingIndex/{id} {
+      allow read, write: if isSuperAdmin();
+    }
+
+    // =========================================
+    // DEFAULT DENY
+    // =========================================
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز تذاكر المسرح</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="church-diocese">
+                مطرانية شبرا الخيمة وتوابعها للأقباط الأرثوذكس
+            </div>
+            <div class="team-name">
+                فريق نجم المشرق المسرحي
+            </div>
+            <div class="church-name">
+                كنيسة السيدة العذراء مريم بالقناطر الخيرية
+            </div>
+        </div>
+    </header>
+
+    <main class="page">
+        <section class="hero">
+            <div class="hero-icon">🎭</div>
+            <h1>احجز تذكرتك الآن</h1>
+            <p>اختر الحفلة التي تريد حجز تذكرتك لها</p>
+        </section>
+
+        <div id="loading" class="loading">جاري تحميل الحفلات...</div>
+
+        <section id="eventsContainer" class="events-container"></section>
+
+        <div id="emptyMessage" class="empty-message" style="display:none;">
+            <div class="empty-icon">🎭</div>
+            <h2>لا توجد حفلات متاحة للحجز حاليًا</h2>
+            <p>يرجى العودة لاحقًا لمعرفة الحفلات الجديدة.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 جميع الحقوق محفوظة لـ MMSTeh</p>
+        <a href="admin.html" class="admin-link footer-admin-link">🔐 الإدارة</a>
+        <a href="https://web.facebook.com/Naagm.Almashriq/"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="facebook-link">🔵 تابعنا على Facebook</a>
+    </footer>
+
+    <script type="module" src="js/index.js"></script>
+</body>
+</html>

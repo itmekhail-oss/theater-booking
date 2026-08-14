@@ -1,0 +1,407 @@
+/* =========================================
+   الصفحة الرئيسية - التصميم النهائي
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Tahoma, Arial, sans-serif;
+    background: radial-gradient(circle at 50% 20%, #3a1730 0, #160d1d 45%, #08060d 100%);
+    color: #ffffff;
+    direction: rtl;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before, body::after {
+    content: "";
+    position: fixed;
+    top: 0; bottom: 0;
+    width: 92px;
+    z-index: -1;
+    background: repeating-linear-gradient(90deg, #4a0f1f 0, #68152a 18px, #360a17 36px);
+    box-shadow: inset 0 0 28px #0009;
+}
+body::before { right: 0; border-radius: 0 0 0 55% / 0 0 0 25%; }
+body::after { left: 0; border-radius: 0 0 55% 0 / 0 0 25% 0; }
+
+/* =========================================
+   Header
+========================================= */
+
+.site-header {
+    background: #0b1120;
+    border-bottom: 1px solid #374151;
+    padding: 18px 4%;
+}
+
+.header-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    align-items: center;
+    gap: 28px;
+}
+
+.church-diocese,
+.church-name {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.8;
+}
+
+.church-diocese {
+    text-align: right;
+}
+
+.church-name {
+    text-align: left;
+}
+
+.team-name {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 800;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.admin-link {
+    display: inline-block;
+    margin-top: 7px;
+    color: #93c5fd;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.admin-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* =========================================
+   Main
+========================================= */
+
+.page {
+    position: relative;
+    width: min(94%, 1250px);
+    margin: 0 auto;
+    padding: 42px 0 55px;
+}
+
+/* =========================================
+   Hero
+========================================= */
+
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 34px 24px;
+    border-radius: 28px;
+    background: radial-gradient(ellipse at center bottom, #7d304b55 0, transparent 68%);
+    margin-bottom: 36px;
+}
+
+.hero-icon {
+    font-size: 44px;
+    line-height: 1;
+    margin-bottom: 14px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 4vw, 42px);
+    line-height: 1.25;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.hero p {
+    color: #d1d5db;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+/* =========================================
+   Loading
+========================================= */
+
+.loading {
+    width: 100%;
+    background: #ffffff;
+    color: #374151;
+    border-radius: 18px;
+    padding: 28px 20px;
+    text-align: center;
+    font-size: 17px;
+    margin-bottom: 24px;
+}
+
+/* =========================================
+   Events Container
+========================================= */
+
+.events-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    align-items: stretch;
+}
+
+/* =========================================
+   Event Card
+========================================= */
+
+.event-card {
+    min-width: 0;
+    background: #ffffff;
+    color: #111827;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.34);
+}
+
+/* =========================================
+   Poster
+========================================= */
+
+.event-poster {
+    width: 100%;
+    height: 360px;
+    background: #e5e7eb;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-poster img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.event-poster-empty {
+    font-size: 58px;
+    color: #6b7280;
+}
+
+/* =========================================
+   Event Content
+========================================= */
+
+.event-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.event-content h3 {
+    text-align: center;
+    font-size: 24px;
+    line-height: 1.45;
+    margin-bottom: 18px;
+    color: #111827;
+}
+
+.event-content p {
+    margin: 8px 0;
+    color: #4b5563;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.event-content p strong {
+    color: #16a34a;
+}
+
+/* =========================================
+   Booking Button
+========================================= */
+
+.book-event-btn {
+    width: 100%;
+    border: 0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: auto;
+    background: #2563eb;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.book-event-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.book-event-btn:active {
+    transform: translateY(0);
+}
+
+/* =========================================
+   Empty Message
+========================================= */
+
+.empty-message {
+    background: #ffffff;
+    color: #111827;
+    border-radius: 18px;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 45px;
+    margin-bottom: 12px;
+}
+
+.empty-message h2 {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.empty-message p {
+    color: #6b7280;
+    line-height: 1.7;
+}
+
+/* =========================================
+   Footer
+========================================= */
+
+.site-footer {
+    position: relative;
+    text-align: center;
+    padding: 28px 20px;
+    border-top: 1px solid #374151;
+    color: #9ca3af;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.site-footer p {
+    margin-bottom: 12px;
+}
+
+.footer-admin-link {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    color: #d8a7b5;
+}
+
+.facebook-link {
+    display: inline-block;
+    color: #60a5fa;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.facebook-link:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   Responsive
+========================================= */
+
+@media (max-width: 900px) {
+    .header-content {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .church-diocese,
+    .church-name,
+    .team-name {
+        text-align: center;
+    }
+
+    .team-name {
+        order: -1;
+    }
+
+    .events-container {
+        grid-template-columns: 1fr;
+    }
+
+    .event-poster {
+        height: 380px;
+    }
+}
+
+@media (max-width: 600px) {
+    .site-header {
+        padding: 14px 5%;
+    }
+
+    .team-name {
+        font-size: 20px;
+    }
+
+    .church-diocese,
+    .church-name {
+        font-size: 13px;
+    }
+
+    .page {
+        width: 92%;
+        padding-top: 30px;
+    }
+
+    .hero {
+        margin-bottom: 28px;
+    }
+
+    .hero-icon {
+        font-size: 38px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .event-poster {
+        height: 300px;
+    }
+
+    .event-content {
+        padding: 20px;
+    }
+
+    .event-content h3 {
+        font-size: 21px;
+    }
+}

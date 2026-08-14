@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختيار المقاعد</title>
+<link rel="stylesheet" href="css/seats.css">
+</head>
+<body>
+<div class="page">
+    <a class="back-link" href="index.html">← العودة للحفلات</a>
+    <h1 id="eventTitle">🎭 اختر مقعدك</h1>
+    <div id="eventInfo" class="event-info"></div>
+
+    <div class="seat-stats" aria-label="إحصائيات المقاعد">
+        <div class="seat-stat capacity">
+            <strong id="capacityCount">0</strong>
+            <span>سعة المسرح</span>
+        </div>
+        <div class="seat-stat booked-stat">
+            <strong id="bookedCount">0</strong>
+            <span>محجوز</span>
+        </div>
+        <div class="seat-stat pending-stat">
+            <strong id="pendingCount">0</strong>
+            <span>قيد الانتظار</span>
+        </div>
+        <div class="seat-stat available-stat">
+            <strong id="availableCount">0</strong>
+            <span>متاح</span>
+        </div>
+    </div>
+
+<div class="legend">
+
+    <div>
+        <span class="legend-seat available"></span>
+        متاح
+    </div>
+
+    <div>
+        <span class="legend-seat pending"></span>
+        قيد الانتظار
+    </div>
+
+    <div>
+        <span class="legend-seat booked"></span>
+        محجوز
+    </div>
+
+    <div>
+        <span class="legend-seat selected"></span>
+        مختار
+    </div>
+
+</div>
+
+    <div id="theater"></div>
+
+    <div class="booking-panel">
+        <h2>🎟️ المقاعد المختارة</h2>
+        <div id="selectedSeats">لا يوجد مقاعد مختارة</div>
+        <hr>
+        <p>سعر التذكرة: <strong id="ticketPrice">0 جنيه</strong></p>
+        <p>الإجمالي: <strong id="totalPrice">0 جنيه</strong></p>
+        <p class="hint">يمكنك اختيار حتى 6 مقاعد</p>
+        <button id="continueBtn">متابعة الحجز</button>
+    </div>
+
+    <div id="customerForm" class="booking-panel" style="display:none;">
+        <h2>👤 بيانات الحجز</h2>
+        <label for="customerName">الاسم بالكامل</label>
+        <input type="text" id="customerName" placeholder="اكتب الاسم بالكامل" autocomplete="name">
+        <label for="customerPhone">رقم الموبايل</label>
+        <input type="tel" id="customerPhone" placeholder="01xxxxxxxxx" inputmode="tel" autocomplete="tel">
+        <button id="confirmBookingBtn">تأكيد الحجز</button>
+    </div>
+</div>
+<script type="module" src="js/seats.js"></script>
+</body>
+</html>
