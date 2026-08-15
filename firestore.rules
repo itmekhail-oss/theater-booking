@@ -14,12 +14,14 @@ service cloud.firestore {
     function hasUserProfile() {
       return signedIn() && exists(userDocPath(request.auth.uid));
     }
-
-    function isSuperAdmin() {
-      return signedIn()
-        && request.auth.token.email == "it.mekhail@gmail.com";
-    }
-
+    
+function isSuperAdmin() {
+  return signedIn()
+    && request.auth.token.email in [
+      "it.mekhail@gmail.com",
+      "mekhail.morcos@yahoo.com"
+    ];
+}
     function isBookingAdmin() {
       return hasUserProfile()
         && get(userDocPath(request.auth.uid)).data.role == "bookingAdmin"
