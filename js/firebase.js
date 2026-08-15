@@ -76,7 +76,11 @@ export const googleProvider = new GoogleAuthProvider();
 // Admin Email
 // =========================================
 
-export const ADMIN_EMAIL = "it.mekhail@gmail.com";
+export const ADMIN_EMAILS = [
+    "it.mekhail@gmail.com",
+    "mekhail.morcos@yahoo.com"
+];
+
 export { firebaseConfig };
 
 export async function createManagedUser(email, password) {
